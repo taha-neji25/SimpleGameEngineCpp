@@ -13,6 +13,18 @@ void processInput(GLFWwindow* window) {
         glfwSetWindowShouldClose(window, true);
 }
 
+void update(){
+    // Update game logic here
+}
+
+void render(){
+    // Clear the color buffer
+    glClearColor(0.9f, 0.5f, 0.9f, 1.0f); // Pink like fucking Barbie 
+    glClear(GL_COLOR_BUFFER_BIT);
+    // Draw your objects here
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+}
+
 int main() {
     // Initialize GLFW
     if (!glfwInit()) {
@@ -26,7 +38,7 @@ int main() {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     // Create a windowed mode window and its OpenGL context
-    GLFWwindow* window = glfwCreateWindow(800, 600, "OpenGL 3.3 Window", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(800, 600, "Game loop setup", NULL, NULL);
     if (!window) {
         std::cerr << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
@@ -53,9 +65,9 @@ int main() {
         // Handle input
         processInput(window);
 
-        // Clear the screen with a color
-        glClearColor(0.9f, 0.9f, 0.9f, 1.0f); // Set clear color
-        glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer
+        update();
+
+        render();
 
         // Swap front and back buffers
         glfwSwapBuffers(window);
